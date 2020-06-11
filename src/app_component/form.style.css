@@ -8,12 +8,18 @@ form{
 form input[name="city"],
 form input[name="country"]{
     background-color: transparent;
-    color:blue;
+    color:white;
     border-bottom: 2px solid rgb(14, 230, 14);
     border-radius: 0;
 }
 
 form input:focus{
-    background-color: transparent;
+    background-color: transparent!important;
     box-shadow: none !important;
+    color:white!important;
+}
+
+
+button{
+    box-shadow: none!important;
 }

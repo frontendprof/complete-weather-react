@@ -50,10 +50,10 @@ class App extends React.Component {
         console.log(response);    
 
         this.setState({
-          city:response.name,
-          country:response.sys.country,
+          city:`${response.name},${response.sys.country}`,
           celsius:this.getCelsius(response.main.temp),
-          desc:response.weather[0].description
+          desc:response.weather[0].description,
+          error:false,
         })
 
       }else{
@@ -72,7 +72,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="App">
-          <Form loadWeather={this.getWeather}/>
+          <Form loadWeather={this.getWeather} error={this.state.error}/>
           <Weather 
           city={this.state.city} 
           country={this.state.country}
