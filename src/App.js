@@ -1,5 +1,6 @@
 import React from 'react';
 import Weather from "./app_component/weather_component";
+import Form from "./app_component/form_component";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'weather-icons/css/weather-icons.css';
@@ -64,6 +65,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="App">
+          <Form />
           <Weather 
           city={this.state.city} 
           country={this.state.country}
