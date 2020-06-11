@@ -8,7 +8,7 @@ form{
 form input[name="city"],
 form input[name="country"]{
     background-color: transparent;
-    color:white;
+    color:blue;
     border-bottom: 2px solid rgb(14, 230, 14);
     border-radius: 0;
 }

@@ -25,12 +25,9 @@ class App extends React.Component {
       icon:undefined,
       main:undefined,
       celsius:undefined,
-      temp_max:undefined,
-      temp_min:undefined,
       desc:"",
       error:false
     };
-    this.getWeather();
   }
 
     getCelsius(temp){
@@ -39,21 +36,31 @@ class App extends React.Component {
     }
 
 
-    getWeather=async ()=>{
-      const api_call=await fetch(`http://api.openweathermap.org/data/2.5/weather?q=Termiz,Uz&appid=${API_KEY}`);
+    getWeather=async (e)=>{
+      e.preventDefault();
 
-      const response = await api_call.json();
+      const city=e.target.elements.city.value;
+      const country=e.target.elements.country.value;
 
-      console.log(response);    
+      if(city&&country){
+        const api_call=await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`);
 
-      this.setState({
-        city:response.name,
-        country:response.sys.country,
-        celsius:this.getCelsius(response.main.temp),
-        temp_min:this.getCelsius(response.main.temp_min),
-        temp_max:this.getCelsius(response.main.temp_max),
-        desc:response.weather[0].description
-      })
+        const response = await api_call.json();
+
+        console.log(response);    
+
+        this.setState({
+          city:response.name,
+          country:response.sys.country,
+          celsius:this.getCelsius(response.main.temp),
+          desc:response.weather[0].description
+        })
+
+      }else{
+        this.setState({error:true})
+      }
+
+      
 
     
   }
@@ -65,13 +72,11 @@ class App extends React.Component {
     return (
       <div>
         <div className="App">
-          <Form />
+          <Form loadWeather={this.getWeather}/>
           <Weather 
           city={this.state.city} 
           country={this.state.country}
           temp_celsius={this.state.celsius}
-          temp_max={this.state.temp_max}
-          temp_min={this.state.temp_min}
           description={this.state.desc}
           weatherIcon={this.state.icon}
           />
